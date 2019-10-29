@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define(
-    "Comment",
+  const PostLike = sequelize.define(
+    "PostLike",
     {
       id: {
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
-      },
-      text: { type: DataTypes.STRING }
+      }
     },
     {
       underscored: false,
@@ -15,15 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Comment.associate = models => {
-    Comment.belongsTo(models.User, {
+  PostLike.associate = models => {
+    PostLike.belongsTo(models.User, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
     });
 
-    Comment.belongsTo(models.Post, {
+    PostLike.belongsTo(models.Post, {
       onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
@@ -31,12 +30,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  Comment.instanceMethods = () => {
-    () => {
-      //eslint-disable-next-line
-      console.log(this.title);
-    };
-  };
-
-  return Comment;
+  return PostLike;
 };

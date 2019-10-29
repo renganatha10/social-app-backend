@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       photoUrl: { type: DataTypes.STRING }
     },
     {
-      underscored: true,
+      underscored: false,
       timestamps: true
     }
   );

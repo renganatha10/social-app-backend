@@ -18,14 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       profilePhoto: DataTypes.STRING
     },
     {
-      underscored: true,
+      underscored: false,
       timestamps: true
     }
   );
-
-  User.associate = models => {
-    User.hasMany(models.Post);
-  };
 
   return User;
 };

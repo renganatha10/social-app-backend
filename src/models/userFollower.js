@@ -1,8 +1,8 @@
-// Users I am Following
+// Users Following Me
 
 module.exports = (sequelize, DataTypes) => {
-  const UserFollowing = sequelize.define(
-    "UserFollowing",
+  const UserFollower = sequelize.define(
+    "UserFollower",
     {
       id: {
         primaryKey: true,
@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       followerId: {
         type: DataTypes.UUID
-      },
-      isFavorite: { type: DataTypes.BOOLEAN }
+      }
     },
     {
       underscored: false,
@@ -23,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  UserFollowing.associate = models => {
-    UserFollowing.belongsTo(models.User, {
+  UserFollower.associate = models => {
+    UserFollower.belongsTo(models.User, {
       onDelete: "CASCADE",
       as: "follower",
       foreignKey: {
@@ -32,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     });
-    UserFollowing.belongsTo(models.User, {
+    UserFollower.belongsTo(models.User, {
       onDelete: "CASCADE",
       as: "user",
       foreignKey: {
@@ -42,5 +41,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  return UserFollowing;
+  return UserFollower;
 };
