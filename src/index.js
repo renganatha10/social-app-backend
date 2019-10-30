@@ -7,6 +7,7 @@ const models = require("./models");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 
 const authenticationMiddleWare = require("./middlewares/authentication");
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use(authenticationMiddleWare);
 app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 const server = http.createServer(app);
 

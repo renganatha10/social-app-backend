@@ -1,6 +1,6 @@
-import { db } from "../../models";
-
 const Sequelize = require("sequelize");
+
+const { db } = require("../../models");
 
 const OP = Sequelize.Op;
 
