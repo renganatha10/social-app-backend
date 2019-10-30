@@ -1,4 +1,4 @@
-import { db } from "../../models";
+const { db } = require("../../models");
 
 const deletePost = async (req, res) => {
   try {

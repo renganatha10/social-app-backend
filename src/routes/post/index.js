@@ -75,3 +75,5 @@ router.delete(
     requestValidator(req, res, next, likeUnlikeValidation, req.params.id),
   deleteComment
 );
+
+module.exports = router;

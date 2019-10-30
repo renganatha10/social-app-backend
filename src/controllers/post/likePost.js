@@ -1,4 +1,4 @@
-import { db } from "../../models";
+const { db } = require("../../models");
 
 const likePost = async (req, res) => {
   try {

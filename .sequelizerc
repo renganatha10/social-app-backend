@@ -5,6 +5,6 @@ console.log(path.resolve("src", "models"), "sdksd");
 module.exports = {
   config: path.resolve("src/config", "db.json"),
   "models-path": path.resolve("src", "models"),
-  // "seeders-path": path.resolve("src", "seeders"),
+  "seeders-path": path.resolve("src", "seeders"),
   "migrations-path": path.resolve("src", "migrations")
 };
