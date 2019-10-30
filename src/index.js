@@ -4,7 +4,11 @@ const cors = require("cors");
 
 // eslint-disable-next-line
 const models = require("./models");
+
+const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+
+const authenticationMiddleWare = require("./middlewares/authentication");
 
 const app = express();
 
@@ -15,6 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("PING PONG");
 });
+
+app.use("/api/auth", authRouter);
+app.use(authenticationMiddleWare);
 app.use("/api/user", userRouter);
 
 const server = http.createServer(app);

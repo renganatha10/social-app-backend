@@ -2,7 +2,7 @@ const { db } = require("../../models");
 
 const getUserById = async (req, res) => {
   try {
-    const user = await db.User.findByPk(req.params.id);
+    const user = await db.User.findByPk(req.userId);
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({

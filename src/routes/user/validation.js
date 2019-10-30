@@ -30,7 +30,15 @@ const updateUser = yup.object().shape({
   gender: yup.mixed().oneOf(["MALE", "FEMALE"])
 });
 
+const followUnfollowValidation = yup.object().shape({
+  followerId: yup.string().required()
+});
+
+const searchValidation = yup.string().required();
+
 module.exports = {
   createUser,
-  updateUser
+  updateUser,
+  followUnfollowValidation,
+  searchValidation
 };

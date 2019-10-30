@@ -7,13 +7,25 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
       },
-      email: { type: DataTypes.STRING, unique: true, allowNull: false },
-      gender: { type: DataTypes.ENUM("MALE", "FEMALE"), allowNull: false },
+      email: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
+      },
+      gender: {
+        type: DataTypes.ENUM("MALE", "FEMALE"),
+        allowNull: false
+      },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
-      nickName: { type: DataTypes.STRING, unique: true },
+      nickName: {
+        type: DataTypes.STRING,
+        unique: true
+      },
       dateOfBirth: DataTypes.DATE,
-      bio: { type: DataTypes.STRING },
+      bio: {
+        type: DataTypes.STRING
+      },
       coverPhoto: DataTypes.STRING,
       profilePhoto: DataTypes.STRING
     },

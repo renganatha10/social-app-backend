@@ -14,7 +14,7 @@ const userAttibutes = [
 
 const updateUser = async (req, res) => {
   try {
-    const user = await db.User.findByPk(req.params.id);
+    const user = await db.User.findByPk(req.userId);
     userAttibutes.forEach(item => {
       if (req.body[item]) {
         user[item] = req.body[item];
