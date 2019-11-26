@@ -2,13 +2,13 @@ const { db } = require("../../models");
 
 const updatePost = async (req, res) => {
   try {
-    const comment = await db.Comment.findByPk(req.params.id);
+    const post = await db.Post.findByPk(req.params.id);
     if (req.body.text) {
-      comment.text = req.body.text;
+      post.text = req.body.text;
     }
-    await comment.save();
+    await post.save();
     res.status(200).json({
-      message: "Comment Updated Successfully"
+      message: "Post Updated Successfully"
     });
   } catch (err) {
     res.status(500).json({

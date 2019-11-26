@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run migrate:db && npm run seed:db",
     "start": "node src/index.js",
     "develop": "env DEBUG=api* nodemon --inspect src/index.js",
     "migrate:db": "sequelize-cli db:migrate",
-    "seed:db": "sequelize-cli db:seed"
+    "seed:db": "sequelize-cli db:seed:all"
   },
   "author": "Renganatha A<renganatha10@gmail.com>",
   "license": "ISC",
