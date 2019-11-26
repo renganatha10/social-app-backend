@@ -10,7 +10,9 @@ const {
   likePost,
   unLikePost,
   getComments,
-  userFeeds
+  userFeeds,
+  userPosts,
+  getPostLikers
 } = require("../../controllers/post");
 const {
   createPostValidation,
@@ -22,8 +24,10 @@ const {
 
 const router = express.Router();
 
+router.get("/", userPosts);
 router.get("/userFeeds", userFeeds);
 router.get("/:id/comments", getComments);
+router.get("/:id/likes", getPostLikers);
 
 router.post(
   "/",

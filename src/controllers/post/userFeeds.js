@@ -6,7 +6,7 @@ const OP = Sequelize.Op;
 
 const userFeed = async (req, res) => {
   try {
-    const myFollowings = await db.userFollowing.findAll({
+    const myFollowings = await db.UserFollowing.findAll({
       where: {
         userId: req.userId
       },
@@ -16,16 +16,17 @@ const userFeed = async (req, res) => {
     const userFeeds = await db.Post.findAll({
       where: {
         userId: {
-          [OP.in]: myFollowings
+          [OP.in]: myFollowings.map(item => item.followerId)
         }
       },
-      include: [{ model: db.User, required: true }],
-      attributes: [
-        "User.Id",
-        "User.firstName",
-        "User.lastName",
-        "User.NickName"
-      ]
+      include: [
+        {
+          model: db.User,
+          required: true,
+          attributes: ["id", "firstName", "lastName", "profilePhoto"]
+        }
+      ],
+      attributes: ["id", "text", "videoUrl", "photoUrl"]
     });
 
     res.status(200).json(userFeeds);

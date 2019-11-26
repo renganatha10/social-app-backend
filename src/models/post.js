@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       text: { type: DataTypes.STRING },
       videoUrl: { type: DataTypes.STRING },
-      photoUrl: { type: DataTypes.STRING }
+      photoUrl: { type: DataTypes.STRING },
+      userId: {
+        type: DataTypes.UUID
+      }
     },
     {
       underscored: false,
@@ -21,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     Post.belongsTo(models.User, {
       onDelete: "CASCADE",
       foreignKey: {
+        name: "userId",
         allowNull: false
       }
     });

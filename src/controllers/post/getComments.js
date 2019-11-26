@@ -2,26 +2,25 @@ const { db } = require("../../models");
 
 const getComments = async (req, res) => {
   try {
-    await db.Comment.findAll({
+    const comments = await db.Comment.findAll({
       where: {
-        userId: req.userId,
         postId: req.params.id
       },
       include: [
-        { model: db.Post, required: true },
-        { model: db.User, required: true }
+        {
+          model: db.Post,
+          required: true,
+          attributes: ["id"]
+        },
+        {
+          model: db.User,
+          required: true,
+          attributes: ["id", "firstName", "lastName"]
+        }
       ],
-      attributes: [
-        "User.id",
-        "User.firstName",
-        "User.lastName",
-        "User.nickName",
-        "Post.id"
-      ]
+      attributes: ["id", "text"]
     });
-    res.status(200).json({
-      message: "Commented Successfully"
-    });
+    res.status(200).json(comments);
   } catch (err) {
     res.status(500).json({
       message: "Something went wrong",

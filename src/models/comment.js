@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Comment.belongsTo(models.User, {
       onDelete: "CASCADE",
       foreignKey: {
+        name: "userId",
         allowNull: false
       }
     });
@@ -26,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     Comment.belongsTo(models.Post, {
       onDelete: "CASCADE",
       foreignKey: {
+        name: "postId",
         allowNull: false
       }
     });

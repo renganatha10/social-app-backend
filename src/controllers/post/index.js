@@ -8,6 +8,8 @@ const likePost = require("./likePost");
 const unLikePost = require("./unlikePost");
 const getComments = require("./getComments");
 const userFeeds = require("./userFeeds");
+const userPosts = require("./userPosts");
+const getPostLikers = require("./getPostLikers");
 
 module.exports = {
   createComment,
@@ -19,5 +21,7 @@ module.exports = {
   likePost,
   unLikePost,
   getComments,
-  userFeeds
+  userFeeds,
+  userPosts,
+  getPostLikers
 };

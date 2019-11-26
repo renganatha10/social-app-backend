@@ -1,23 +1,24 @@
 const { db } = require("../../models");
 
-const getMyFollowings = async (req, res) => {
+const getPostLikers = async (req, res) => {
   try {
-    const followings = await db.UserFollowing.findAll({
-      where: { userId: req.userId },
+    const postLikers = await db.PostLike.findAll({
+      where: {
+        postId: req.params.id
+      },
       include: [
         {
           attributes: ["id", "firstName", "lastName"],
           model: db.User,
-          as: "user",
           required: true
         }
       ],
       attributes: ["id"]
     });
-    return res.status(200).json(followings);
+    return res.status(200).json(postLikers);
   } catch (err) {
     return res.status(500).json(err);
   }
 };
 
-module.exports = getMyFollowings;
+module.exports = getPostLikers;
