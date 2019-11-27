@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run migrate:db && npm run seed:db",
-    "start": "node src/index.js",
-    "develop": "env DEBUG=api* nodemon --inspect src/index.js",
+    "postinstall": "npm run migrate:db & npm run seed:db",
     "migrate:db": "sequelize-cli db:migrate",
-    "seed:db": "sequelize-cli db:seed:all"
+    "seed:db": "sequelize-cli db:seed:all",
+    "start": "npm run start:app & npm run start:cron & npm run start:notification & npm run start:socket",
+    "start:app": "node src/index.js",
+    "start:cron": "node src/workers/cron-jobs/index.js",
+    "start:notification": "node src/workers/notification-jobs/index.js",
+    "start:socket": "node src/workers/socket-server/index.js",
+    "develop": "npm run develop:app & npm run develop:cron & npm run develop:notification & npm run develop:socket",
+    "develop:app": "env DEBUG=api* nodemon --inspect src/index.js",
+    "develop:cron": "env DEBUG=api* nodemon --inspect=1234 src/workers/cron-jobs/index.js",
+    "develop:notification": "env DEBUG=api* nodemon --inspect=1235 src/workers/notification-jobs/index.js",
+    "develop:socket": "env DEBUG=api* nodemon --inspect=1236 src/workers/socket-server/index.js"
   },
   "author": "Renganatha A<renganatha10@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bull": "^3.12.1",
+    "concurrently": "^5.0.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -23,6 +33,7 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.1",
     "socket.io": "^2.3.0",
+    "toobusy-js": "^0.5.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
