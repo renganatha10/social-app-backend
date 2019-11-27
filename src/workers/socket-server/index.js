@@ -1,5 +1,6 @@
 const http = require("http");
 const io = require("socket.io")(http);
+require("dotenv").config({ path: ".env" });
 
 const createWorker = require("../../utils/bull/create-worker");
 const {
@@ -23,7 +24,7 @@ const server = createWorker({
   [SEND_REALTIME_USER_FEED]: sendRealTimeUserFeed
 });
 
-server.listen(process.env.PORT || 3040);
+server.listen(process.env.SOCKET_PORT || 3040);
 
 io.on("connection", socket => {
   const { token } = socket.handshake.query;

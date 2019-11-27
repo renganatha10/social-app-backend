@@ -1,4 +1,5 @@
 const { db } = require("../../models");
+const { sendRealTimeUserFeeds } = require("../../utils/bull");
 
 const createPost = async (req, res) => {
   try {
@@ -6,6 +7,12 @@ const createPost = async (req, res) => {
       ...req.body,
       userId: req.userId
     });
+
+    sendRealTimeUserFeeds.add({
+      post: newPost,
+      userId: req.userId
+    });
+
     res.status(200).json({
       message: "Post Created Successfully",
       payload: {

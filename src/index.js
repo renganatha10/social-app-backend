@@ -1,6 +1,7 @@
 const http = require("http");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config({ path: ".env" });
 
 // eslint-disable-next-line
 const models = require("./models");
@@ -10,6 +11,7 @@ const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 
 const authenticationMiddleWare = require("./middlewares/authentication");
+const bullArena = require("./middlewares/bull-arena");
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/", bullArena);
 app.get("/", (req, res) => {
   res.send("PING PONG");
 });
@@ -28,7 +31,7 @@ app.use("/api/post", postRouter);
 
 const server = http.createServer(app);
 
-server.listen(process.env.PORT || 3010);
+server.listen(process.env.APP_PORT || 3010);
 
 server.on("listening", () => {
   const addr = server.address();

@@ -1,7 +1,7 @@
 const express = require("express");
 const arena = require("bull-arena");
 
-const getRedisConfig = require("./../utils/redis-config");
+const getRedisConfig = require("./../utils/bull/redis-config");
 const BULLCONSTANTS = require("./../utils/bull/bull-constants");
 
 const queues = Object.keys(BULLCONSTANTS).map(constant => {

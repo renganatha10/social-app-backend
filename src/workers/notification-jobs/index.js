@@ -1,20 +1,17 @@
-const http = require("http");
-const express = require("express");
-const cors = require("cors");
+require("dotenv").config({ path: ".env" });
 
-const app = express();
+const createWorker = require("../../utils/bull/create-worker");
+const {
+  SEND_EMAIL_WHEN_SOMEBODY_FOLLOWS_ME
+} = require("../../utils/bull/bull-constants");
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const sendEmailWhenSomebodyFollowMe = require("./follow");
 
-app.get("/", (req, res) => {
-  res.send("PING PONG FROM Notification JOBS");
+const server = createWorker({
+  [SEND_EMAIL_WHEN_SOMEBODY_FOLLOWS_ME]: sendEmailWhenSomebodyFollowMe
 });
 
-const server = http.createServer(app);
-
-server.listen(process.env.PORT || 3030);
+server.listen(process.env.NOTIFICAITON_PORT || 3030);
 
 server.on("listening", () => {
   const addr = server.address();

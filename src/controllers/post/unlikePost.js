@@ -1,4 +1,5 @@
 const { db } = require("../../models");
+const { sendRealTimeUnlikes } = require("../../utils/bull");
 
 const unlikePost = async (req, res) => {
   try {
@@ -7,6 +8,10 @@ const unlikePost = async (req, res) => {
         postId: req.params.id,
         userId: req.userId
       }
+    });
+    sendRealTimeUnlikes.add({
+      postId: req.params.id,
+      userId: req.userId
     });
     res.status(200).json({
       message: "Unliked Successfully"
